@@ -1,122 +1,101 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Georgia', serif;
-    background-color: #f0f2f5;
-}
-
 .book-container {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .epub-viewer {
-    display: flex;
-    width: 80%;
-    height: 80%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background: #fff;
-    border-radius: 8px;
-    overflow: hidden;
-    position: relative;
+  width: 80%;
+  height: 80%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
-.page {
-    flex: 1;
-    padding: 20px;
-    background: #fff;
-    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.6s;
-    overflow: auto;
-}
-
-#left-page {
-    border-right: 2px solid #ddd;
-}
-
-#right-page {
-    border-left: 2px solid #ddd;
+.page-counter {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 18px;
+  z-index: 1;
 }
 
 .nav-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    font-size: 24px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: background-color 0.3s ease;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 28px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
 }
 
 .nav-button:hover {
-    background-color: #0056b3;
-}
-
-.nav-button i {
-    margin: 0;
+  background-color: #0056b3;
 }
 
 .nav-button:disabled {
-    background-color: #c0c0c0;
-    cursor: not-allowed;
+  background-color: #c0c0c0;
+  cursor: not-allowed;
 }
 
 #prev-btn {
-    left: 30px;
+  left: 40px;
 }
 
 #next-btn {
-    right: 30px;
+  right: 40px;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
-    .epub-viewer {
-        width: 90%;
-        height: 70%;
-    }
+  .epub-viewer {
+    width: 95%;
+    height: 80%;
+  }
 
-    #prev-btn {
-        left: -20px;
-    }
+  #prev-btn {
+    left: 10px;
+  }
 
-    #next-btn {
-        right: -20px;
-    }
+  #next-btn {
+    right: 10px;
+  }
 }
 
 @media (max-width: 480px) {
-    .epub-viewer {
-        width: 100%;
-        height: 60%;
-    }
+  .epub-viewer {
+    width: 100%;
+    height: 70%;
+  }
 
-    #prev-btn {
-        left: -15px;
-    }
+  #prev-btn {
+    left: 5px;
+  }
 
-    #next-btn {
-        right: -15px;
-    }
+  #next-btn {
+    right: 5px;
+  }
 }

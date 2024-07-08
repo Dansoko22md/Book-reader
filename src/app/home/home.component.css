@@ -1,0 +1,100 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f2f5;
+}
+
+.home-container {
+  background-color: white;
+  padding: 20px;
+  text-align: center;
+  min-height: 100vh;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.home-container h1 {
+  font-size: 36px; /* Augmenté de 32px à 36px */
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  background-color: #f0f2f5;
+  border-radius: 30px;
+  padding: 10px 20px; /* Augmenté de 5px 10px à 10px 20px */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 700px; /* Augmenté de 600px à 700px */
+  margin: 20px auto;
+  transition: box-shadow 0.3s ease;
+}
+
+.search-container input {
+  border: none;
+  padding: 12px; /* Augmenté de 10px à 12px */
+  font-size: 18px; /* Augmenté de 16px à 18px */
+  outline: none;
+  border-radius: 20px;
+  flex: 1;
+}
+
+.search-container button {
+  background-color: #007bff;
+  border: none;
+  color: white;
+  padding: 12px 24px; /* Augmenté de 10px 20px à 12px 24px */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.search-container button:hover {
+  background-color: #0056b3;
+}
+
+.search-container button i {
+  font-size: 18px; /* Augmenté de 16px à 18px */
+}
+
+.book-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px; /* Augmenté de 20px à 30px */
+}
+
+.book-item {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s, box-shadow 0.3s;
+  width: 200px; /* Augmenté de 150px à 200px */
+  text-align: center;
+}
+
+.book-item img {
+  width: 100%;
+  height: 250px; /* Augmenté de 200px à 250px */
+  object-fit: cover;
+}
+
+.book-item h3 {
+  margin: 10px 0;
+  font-size: 20px; /* Augmenté de 18px à 20px */
+  color: #007bff;
+}
+
+.book-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}

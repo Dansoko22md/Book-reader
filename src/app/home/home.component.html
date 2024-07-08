@@ -1,0 +1,13 @@
+<div class="home-container">
+    <h1>Livres Disponibles</h1>
+    <div class="search-container">
+        <input type="text" placeholder="Rechercher un livre..." (input)="onSearch($event)">
+        <button><i class="fas fa-search"></i></button>
+    </div>
+    <div class="book-list">
+        <div *ngFor="let book of filteredBooks" class="book-item" (click)="openBook(book.id)">
+            <img [src]="book.cover" alt="{{book.title}} Cover">
+            <h3>{{book.title}}</h3>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="editor-container">
+    <h1>Éditer des Livres</h1>
+    <div class="book-list">
+        <div *ngFor="let book of books; let i = index" class="book-item" [ngClass]="'design-' + (i % 4)">
+            <div class="book-cover">
+                <div class="book-spine"></div>
+                <div class="book-front">
+                    <h3>{{book.title}}</h3>
+                    <button class="edit-button" (click)="editBook(book.id)">
+                        <i class="fas fa-edit"></i> Modifier
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

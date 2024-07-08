@@ -1,0 +1,122 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f2f5;
+}
+
+.editor-container {
+  background-color: white;
+  padding: 20px;
+  text-align: center;
+  min-height: 100vh;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.editor-container h1 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.book-list {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.book-item {
+  width: 160px; /* Taille réaliste du livre */
+  height: 240px; /* Taille réaliste du livre */
+  display: flex;
+  align-items: center;
+  perspective: 800px;
+  margin-bottom: 20px;
+}
+
+.book-cover {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transform: rotateY(0deg);
+  transition: transform 0.6s;
+}
+
+.book-cover:hover {
+  transform: rotateY(-10deg);
+}
+
+.book-spine {
+  position: absolute;
+  width: 20px;
+  height: 100%;
+  background: #333;
+  left: 15px;
+  top: 0;
+  transform: rotateY(90deg);
+  transform-origin: left;
+  z-index: 1;
+}
+
+.book-front {
+  position: absolute;
+  width: calc(100% - 20px);
+  height: 100%;
+  background-color: #007bff;
+  left: 20px;
+  top: 0;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.book-front h3 {
+  color: white;
+  font-size: 16px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.edit-button {
+  background-color: rgba(255, 255, 255, 0.7);
+  border: none;
+  color: #007bff;
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.edit-button:hover {
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.edit-button i {
+  margin-right: 5px;
+}
+
+.design-0 .book-front {
+  background-color: #007bff;
+}
+
+.design-1 .book-front {
+  background-color: #28a745;
+}
+
+.design-2 .book-front {
+  background-color: #ffc107;
+}
+
+.design-3 .book-front {
+  background-color: #dc3545;
+}

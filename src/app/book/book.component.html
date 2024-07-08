@@ -1,14 +1,10 @@
 <div class="book-container">
-    <button id="prev-btn" class="nav-button circle-button" (click)="previousPage()">
+    <div id="viewer" class="epub-viewer"></div>
+    <div id="page-counter" class="page-counter"></div>
+    <button id="prev-btn" class="nav-button" (click)="previousPage()">
         <i class="fas fa-arrow-left"></i>
     </button>
-
-    <div id="viewer" class="epub-viewer">
-        <div id="left-page" class="page"></div>
-        <div id="right-page" class="page"></div>
-    </div>
-
-    <button id="next-btn" class="nav-button circle-button" (click)="nextPage()">
+    <button id="next-btn" class="nav-button" (click)="nextPage()">
         <i class="fas fa-arrow-right"></i>
     </button>
 </div>

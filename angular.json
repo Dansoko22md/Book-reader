@@ -27,7 +27,11 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+         "scripts": [
+        "node_modules/jquery/dist/jquery.min.js",
+          "src/assets/js/lib/turn.min.js"
+        ]
+
           },
           "configurations": {
             "production": {
@@ -82,7 +86,7 @@
             ],
             "styles": [
               "src/styles.css",
-               "../node_modules/@fortawesome/fontawesome-free/css/all.min.css"
+               "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
             ],
             "scripts": []
           }
