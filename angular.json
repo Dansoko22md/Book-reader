@@ -29,7 +29,8 @@
             ],
          "scripts": [
         "node_modules/jquery/dist/jquery.min.js",
-          "src/assets/js/lib/turn.min.js"
+          "src/assets/js/turn.min.js",
+          "src/assets/js/turn.js"
         ]
 
           },
@@ -88,7 +89,11 @@
               "src/styles.css",
                "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
             ],
-            "scripts": []
+            "scripts": [
+             "node_modules/jquery/dist/jquery.min.js",
+             "src/assets/js/turn.min.js",
+              "src/assets/js/turn.js"
+            ]
           }
         }
       }

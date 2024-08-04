@@ -3,11 +3,11 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: 'Arial', sans-serif;
-  background-color: #f0f2f5;
+  background-color: #f3f2ed;
 }
 
 .home-container {
-  background-color: white;
+  background-color: #f3f2ed;
   padding: 20px;
   text-align: center;
   min-height: 100vh;

@@ -1,0 +1,24 @@
+<!-- flipbook.component.html -->
+<div class="container">
+    <div id="flipbook">
+        <!-- Hard front cover -->
+        <div class="hard front-cover">
+            <img src="assets/covers/prince.jpg" alt="Front Cover">
+        </div>
+
+        <!-- Book pages -->
+        <ng-container *ngFor="let page of pages; let i = index">
+            <div class="page" [ngClass]="{'even': (i + 1) % 2 === 0, 'odd2': (i + 1) % 2 !== 0}">
+                <div class="pages-content">
+                    <h1>Chapter {{ i + 1 }}</h1>
+                    <p>{{ page }}</p>
+                </div>
+            </div>
+        </ng-container>
+
+        <!-- Hard back cover -->
+        <div class="hard back-cover">
+            <img src="assets/covers/book.jpg" alt="Back Cover">
+        </div>
+    </div>
+</div>

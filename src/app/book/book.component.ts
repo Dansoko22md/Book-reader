@@ -4,13 +4,14 @@ import ePub from 'epubjs';
 
 @Component({
   selector: 'app-book',
-   standalone: true,
+  standalone: true,
   templateUrl: './book.component.html',
   styleUrls: ['./book.component.css']
 })
 export class BookComponent implements OnInit, AfterViewInit {
   private book: any;
-  private rendition: any;
+  private rendition1: any;
+  private rendition2: any;
   private currentLocation: any;
   bookId?: number;
 
@@ -37,20 +38,27 @@ export class BookComponent implements OnInit, AfterViewInit {
   loadBook(): void {
     console.log('Loading book...');
     this.book = ePub(`assets/books/book${this.bookId}.epub`); 
-    this.rendition = this.book.renderTo('viewer', {
+    this.rendition1 = this.book.renderTo('viewer-1', {
       width: '100%',
       height: '100%'
     });
 
-    this.rendition.display().then(() => {
-      console.log('Book displayed');
-    }).catch((error: any) => {
-      console.error('Error displaying book:', error);
+    this.rendition2 = this.book.renderTo('viewer-2', {
+      width: '100%',
+      height: '100%'
     });
 
-    this.rendition.on('relocated', (location: any) => {
+    this.rendition1.display().then(() => {
+      this.syncViewers();
+      console.log('Book displayed in viewer-1');
+    }).catch((error: any) => {
+      console.error('Error displaying book in viewer-1:', error);
+    });
+
+    this.rendition1.on('relocated', (location: any) => {
       this.currentLocation = location;
       this.updatePageCounter();
+      this.syncViewers();
     });
 
     this.book.ready.then(() => {
@@ -58,6 +66,17 @@ export class BookComponent implements OnInit, AfterViewInit {
         this.updatePageCounter();
       });
     });
+  }
+
+  syncViewers(): void {
+    if (this.currentLocation) {
+      const nextCfi = this.book.locations.cfiFromLocation(this.currentLocation.end.location);
+      this.rendition2.display(nextCfi).then(() => {
+        console.log('Next page displayed in viewer-2');
+      }).catch((error: any) => {
+        console.error('Error displaying next page in viewer-2:', error);
+      });
+    }
   }
 
   updatePageCounter(): void {
@@ -70,18 +89,20 @@ export class BookComponent implements OnInit, AfterViewInit {
   }
 
   previousPage(): void {
-    this.rendition.prev().then(() => {
-      console.log('Previous page displayed');
+    this.rendition1.prev().then(() => {
+      this.syncViewers();
+      console.log('Previous page displayed in viewer-1');
     }).catch((error: any) => {
-      console.error('Error displaying previous page:', error);
+      console.error('Error displaying previous page in viewer-1:', error);
     });
   }
 
   nextPage(): void {
-    this.rendition.next().then(() => {
-      console.log('Next page displayed');
+    this.rendition1.next().then(() => {
+      this.syncViewers();
+      console.log('Next page displayed in viewer-1');
     }).catch((error: any) => {
-      console.error('Error displaying next page:', error);
+      console.error('Error displaying next page in viewer-1:', error);
     });
   }
 }

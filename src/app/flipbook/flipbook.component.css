@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css?family=Stalemate');
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+}
+
+body {
+  background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('https://s-media-cache-ak0.pinimg.com/originals/30/b3/a9/30b3a9b27032a6b9c1d7a69d2400fb9e.jpg');
+  font-family: 'Stalemate', cursive;
+}
+
+.container {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#flipbook {
+  width: 800px;
+  height: 600px;
+  position: relative;
+}
+
+.page, .hard {
+  width: 400px;
+  height: 600px;
+  position: absolute;
+}
+
+.page {
+  background: url('../../assets/covers/page.jpg') no-repeat center center;
+  background-size: cover;
+  box-shadow: inset 0px 0px 10px rgba(0,0,0,0.5); /* Inner shadow for separation */
+}
+
+.hard.front-cover {
+  background: url('../../assets/covers/prince.jpg') no-repeat center center;
+  background-size: cover;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for cover */
+}
+
+.hard.back-cover {
+  background: url('../../assets/covers/book.jpg') no-repeat center center;
+  background-size: cover;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for cover */
+}
+
+.pages-content {
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10%;
+}
+
+
+
