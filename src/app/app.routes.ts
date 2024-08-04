@@ -11,7 +11,7 @@ export const routes: Routes = [
    { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '', component: HomeComponent },
   { path: 'book/:id', component: BookComponent },
-    { path: 'book1/:id', component: FlipbookComponent },
+    { path: 'flipbook', component: FlipbookComponent },
   { path: 'editor', component: BookEditorComponent },
     { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
