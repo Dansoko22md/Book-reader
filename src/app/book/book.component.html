@@ -1,14 +1,12 @@
-<div class="book-container">
-    <div class="book">
-        <div id="viewer-1" class="epub-viewer left-page"></div>
-        <div class="spine"></div>
-        <div id="viewer-2" class="epub-viewer right-page"></div>
+<div class="book-navigation-container">
+    <div class="book-viewer-container">
+        <img src="assets/icons/left.png" alt="Previous Page" class="nav-button left-button" (click)="previousPage()">
+
+        <div id="viewer" class="viewer">
+            <div class="page-number left-page-number">1</div> <!-- Left page number -->
+            <div class="page-number right-page-number">2</div> <!-- Right page number -->
+        </div>
+
+        <img src="assets/icons/right.png" alt="Next Page" class="nav-button right-button" (click)="nextPage()">
     </div>
-    <div id="page-counter" class="page-counter"></div>
-    <button id="prev-btn" class="nav-button" (click)="previousPage()">
-        <i class="fas fa-arrow-left"></i>
-    </button>
-    <button id="next-btn" class="nav-button" (click)="nextPage()">
-        <i class="fas fa-arrow-right"></i>
-    </button>
 </div>

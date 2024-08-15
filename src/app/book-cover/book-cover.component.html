@@ -1,0 +1,10 @@
+<div class="book-container">
+    <div class="book-cover">
+        <h1>{{ bookTitle }}</h1>
+        <img [src]="bookCover" alt="Book Cover" class="cover-image" />
+        <img src="assets/icons/right.png" alt="Next Page" class="nav-button right-button" (click)="openBook()">
+    </div>
+    <div class="footer">
+        <button class="cover-button" (click)="openBook()">Continuer &#x25B6;</button>
+    </div>
+</div>

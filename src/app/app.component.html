@@ -5,21 +5,6 @@
     <title>Ma Bibliothèque</title>
 </head>
 <div class="app-container">
-    <nav>
-        <div class="nav-container">
-            <a class="brand" href="/"><i class="fas fa-book"></i> &nbsp;Ma Bibliothèque</a>
-            <button class="hamburger" (click)="toggleMenu()">
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="nav-links" [class.active]="menuActive">
-                <a routerLink="/" routerLinkActive="router-link-active"><i class="fas fa-home"></i>&nbsp; Accueil</a>
-                <a routerLink="/flipbook" routerLinkActive="router-link-active"><i class="fas fa-book-open"></i>&nbsp;
-                    Flipbook</a>
 
-                <a href="#"><i class="fas fa-info-circle"></i>&nbsp; À propos</a>
-                <a href="#"><i class="fas fa-envelope"></i>&nbsp; Contact</a>
-            </div>
-        </div>
-    </nav>
     <router-outlet></router-outlet>
 </div>

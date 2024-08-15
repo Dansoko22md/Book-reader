@@ -4,16 +4,13 @@ import ePub from 'epubjs';
 
 @Component({
   selector: 'app-book',
-  standalone: true,
   templateUrl: './book.component.html',
   styleUrls: ['./book.component.css']
 })
 export class BookComponent implements OnInit, AfterViewInit {
   private book: any;
-  private rendition1: any;
-  private rendition2: any;
-  private currentLocation1: any;
-  private currentLocation2: any;
+  private rendition: any;
+  private currentLocation: any;
   bookId?: number;
 
   constructor(private route: ActivatedRoute) {}
@@ -39,105 +36,95 @@ export class BookComponent implements OnInit, AfterViewInit {
   loadBook(): void {
     console.log('Loading book...');
     this.book = ePub(`assets/books/book${this.bookId}.epub`);
-    this.rendition1 = this.book.renderTo('viewer-1', {
+    this.rendition = this.book.renderTo('viewer', {
       width: '100%',
-      height: '100%'
+      height: '100%',
+      spread: 'auto' // Spread pages automatically to handle two pages view
     });
 
-    this.rendition2 = this.book.renderTo('viewer-2', {
-      width: '100%',
-      height: '100%'
+    this.rendition.display().then(() => {
+      console.log('Book displayed');
+      this.updatePageNumbers();
+      this.updateNavigationButtons();
+    }).catch((error: any) => {
+      console.error('Error displaying book:', error);
+    });
+
+    this.rendition.on('relocated', (location: any) => {
+      this.currentLocation = location;
+      this.updatePageNumbers();
+      this.updateNavigationButtons();
     });
 
     this.book.ready.then(() => {
       this.book.locations.generate(1000).then(() => {
-        this.rendition1.display().then(() => {
-          this.currentLocation1 = this.rendition1.currentLocation()?.start.cfi;
-          this.displayNextPageInViewer2();
-          this.updatePageCounter();
-          console.log('Page displayed in viewer-1');
-        }).catch((error: any) => {
-          console.error('Error displaying page in viewer-1:', error);
-        });
+        this.updatePageNumbers();
+        this.updateNavigationButtons();
       });
-    });
-
-    this.rendition1.on('relocated', (location: any) => {
-      this.currentLocation1 = location?.start?.cfi;
-      this.updatePageCounter();
-    });
-
-    this.rendition2.on('relocated', (location: any) => {
-      this.currentLocation2 = location?.start?.cfi;
     });
   }
 
-  displayNextPageInViewer2(): void {
-    this.rendition2.display(this.currentLocation1).then(() => {
-      this.rendition2.next().then(() => {
-        this.currentLocation2 = this.rendition2.currentLocation()?.start.cfi;
-        console.log('Next page displayed in viewer-2');
-      }).catch((error: any) => {
-        console.error('Error displaying next page in viewer-2:', error);
-      });
-    }).catch((error: any) => {
-      console.error('Error displaying current page in viewer-2:', error);
-    });
-  }
+  updatePageNumbers(): void {
+    const leftPageNumber = document.querySelector('.left-page-number');
+    const rightPageNumber = document.querySelector('.right-page-number');
 
-  displayPreviousPageInViewer2(): void {
-    if (this.currentLocation1 !== this.book.locations[0].start.cfi) {
-      this.rendition2.prev().then(() => {
-        this.currentLocation2 = this.rendition2.currentLocation()?.start.cfi;
-        console.log('Previous page displayed in viewer-2');
-      }).catch((error: any) => {
-        console.error('Error displaying previous page in viewer-2:', error);
-      });
+    if (this.currentLocation && this.book.locations) {
+      const currentPage = this.book.locations.locationFromCfi(this.currentLocation.start.cfi) + 1;
+      const totalPages = this.book.locations.total;
+
+      if (leftPageNumber) {
+        leftPageNumber.textContent = `${currentPage}`;
+      }
+
+      if (rightPageNumber) {
+        rightPageNumber.textContent = `${Math.min(currentPage + 1, totalPages)}`;
+      }
+
+      console.log(`Current pages: ${currentPage} and ${Math.min(currentPage + 1, totalPages)}`);
     }
   }
 
-  updatePageCounter(): void {
-    const pageCounter = document.getElementById('page-counter');
-    if (pageCounter && this.currentLocation1) {
-      const currentPage = this.book.locations.locationFromCfi(this.currentLocation1) + 1;
+  updateNavigationButtons(): void {
+    const leftButton = document.querySelector('.left-button') as HTMLElement;
+    const rightButton = document.querySelector('.right-button') as HTMLElement;
+
+    if (this.currentLocation && this.book.locations) {
+      const currentPage = this.book.locations.locationFromCfi(this.currentLocation.start.cfi) + 1;
       const totalPages = this.book.locations.total;
-      pageCounter.innerText = `Page ${currentPage} of ${totalPages}`;
+
+      // Hide left button on the first page
+      if (currentPage === 1) {
+        leftButton.style.display = 'none';
+         rightButton.style.marginLeft = '35px';
+      } else {
+        leftButton.style.display = 'block';
+         rightButton.style.marginLeft = '0';
+      }
+
+      // Hide right button on the last page
+      if (currentPage >= totalPages) {
+        rightButton.style.display = 'none';
+         leftButton.style.marginLeft = '-35px';
+      } else {
+        rightButton.style.display = 'block';
+         leftButton.style.marginLeft = '0';
+      }
     }
   }
 
   previousPage(): void {
-    if (this.book.locations.locationFromCfi(this.currentLocation1) > 0) {
-      this.rendition2.prev().then(() => {
-        this.currentLocation2 = this.rendition2.currentLocation()?.start.cfi;
-        this.rendition1.prev().then(() => {
-          this.currentLocation1 = this.rendition1.currentLocation()?.start.cfi;
-          this.updatePageCounter();
-          console.log('Previous pages displayed in both viewers');
-        }).catch((error: any) => {
-          console.error('Error displaying previous page in viewer-1:', error);
-        });
-      }).catch((error: any) => {
-        console.error('Error displaying previous page in viewer-2:', error);
-      });
-    } else {
-      console.log('Already at the first page, cannot go back further.');
-    }
+    this.rendition.prev().then(() => {
+      console.log('Previous page displayed');
+    }).catch((error: any) => {
+      console.error('Error displaying previous page:', error);
+    });
   }
 
   nextPage(): void {
-    const totalPages = this.book.locations.total;
-
-    if (this.book.locations.locationFromCfi(this.currentLocation1) < totalPages - 1) {
-      this.rendition1.next().then(() => {
-        this.currentLocation1 = this.rendition1.currentLocation()?.start.cfi;
-        this.displayNextPageInViewer2();
-        this.updatePageCounter();
-        console.log('Next pages displayed in both viewers');
-      }).catch((error: any) => {
-        console.error('Error displaying next pages:', error);
-      });
-    } else {
-      console.log('Already at the last page, cannot go forward.');
-    }
+    this.rendition.next().then(() => {
+      console.log('Next page displayed');
+    }).catch((error: any) => {
+      console.error('Error displaying next page:', error);
+    });
   }
 }
